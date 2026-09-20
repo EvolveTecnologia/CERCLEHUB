@@ -87,27 +87,27 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onCourseClick, onCategoryClick,
     touchStartX.current = null;
   };
 
-  const CONTENT_PADDING = "px-6 md:px-12";
+  const CONTENT_PADDING = "px-4 sm:px-6 md:px-10";
 
   const SectionRow = ({ title, category }: { title: string, category: Category }) => {
     const courses = COURSES.filter(c => c.category === category);
     if (courses.length === 0) return null;
 
     return (
-      <section className="group/section animate-in fade-in slide-in-from-bottom-4 duration-700 mb-6 md:mb-4">
-        <h2 className={`text-sm md:text-lg font-bold text-gray-200 mb-2 uppercase tracking-wide ${CONTENT_PADDING}`}>
+      <section className="group/section animate-in fade-in slide-in-from-bottom-4 duration-700 mb-5 md:mb-6">
+        <h2 className={`text-xs sm:text-sm md:text-base font-bold text-gray-200 mb-2 uppercase tracking-wide ${CONTENT_PADDING}`}>
           {title}
         </h2>
         <div className="relative">
-          <div className={`flex gap-3 md:gap-5 overflow-x-auto hide-scrollbar py-2 md:py-4 ${CONTENT_PADDING} scroll-smooth items-start md:items-center`}>
+          <div className={`flex gap-3 md:gap-4 overflow-x-auto hide-scrollbar py-2 ${CONTENT_PADDING} scroll-smooth items-start`}>
             {courses.map(course => (
-              <div key={course.id} className="w-40 md:w-80 flex-shrink-0">
+              <div key={course.id} className="w-36 sm:w-48 md:w-60 lg:w-64 flex-shrink-0">
                 <CourseCard course={course} onClick={onCourseClick} />
               </div>
             ))}
-            <div className="w-6 flex-shrink-0" />
+            <div className="w-4 flex-shrink-0" />
           </div>
-          <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-[#122C34] to-transparent pointer-events-none hidden md:block z-20" />
+          <div className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-[#122C34] to-transparent pointer-events-none hidden md:block z-20" />
         </div>
       </section>
     );
@@ -117,15 +117,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onCourseClick, onCategoryClick,
     <div className="pb-24 bg-[#122C34] min-h-screen font-sans relative text-white">
       
       {/* Mobile Logo Header */}
-      <div className="fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center md:hidden bg-gradient-to-b from-[#122C34] via-[#122C34]/90 to-transparent pointer-events-none">
+      <div className="fixed top-0 left-0 w-full z-50 px-5 py-3 flex justify-between items-center md:hidden bg-gradient-to-b from-[#122C34] via-[#122C34]/90 to-transparent pointer-events-none">
         <div className="pointer-events-auto">
-          <Logo inverted={true} className="h-9 w-auto drop-shadow-md" />
+          <Logo inverted={true} className="h-8 w-auto drop-shadow-md" />
         </div>
       </div>
 
       {/* Hero Banner Area */}
       <div 
-        className="relative w-full h-[60vh] md:h-[75vh] overflow-hidden group mb-6 md:mb-8"
+        className="relative w-full h-[52vh] sm:h-[60vh] md:h-[70vh] overflow-hidden group mb-5 md:mb-7"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -153,38 +153,38 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onCourseClick, onCategoryClick,
               </div>
               
               {/* Text Content */}
-              <div className={`absolute bottom-16 md:top-0 md:bottom-0 left-0 w-full md:w-[50%] flex flex-col justify-end md:justify-center z-20 ${CONTENT_PADDING}`}>
-                <div className="animate-in slide-in-from-left-10 fade-in duration-700 delay-100 space-y-3 md:space-y-5">
+              <div className={`absolute bottom-12 md:top-0 md:bottom-0 left-0 w-full md:w-[55%] flex flex-col justify-end md:justify-center z-20 ${CONTENT_PADDING}`}>
+                <div className="animate-in slide-in-from-left-10 fade-in duration-700 delay-100 space-y-2.5 md:space-y-4">
                   
                   <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-1 bg-[#0A7A94] text-white rounded-md text-[10px] font-black uppercase tracking-wider">
+                    <span className="px-2 py-0.5 bg-[#0A7A94] text-white rounded-md text-[9px] sm:text-[10px] font-black uppercase tracking-wider">
                       {slide.subtitle}
                     </span>
-                    <span className="text-[11px] font-bold text-[#0E98A8] uppercase tracking-widest pl-2">
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[#0E98A8] uppercase tracking-widest pl-1">
                       {slide.category}
                     </span>
                   </div>
 
-                  <h2 className="text-2xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight leading-[0.95] drop-shadow-xl max-w-2xl">
+                  <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight leading-[1.05] drop-shadow-xl max-w-xl">
                     {slide.title}
                   </h2>
                   
-                  <p className="text-xs md:text-base text-gray-200 font-medium max-w-md leading-relaxed line-clamp-3 md:line-clamp-none">
+                  <p className="text-xs sm:text-sm text-gray-200 font-medium max-w-md leading-relaxed line-clamp-2 md:line-clamp-3">
                     {slide.description}
                   </p>
                   
-                  <div className="flex items-center gap-3 pt-2">
+                  <div className="flex items-center gap-2.5 pt-1">
                     <button 
                       onClick={() => onCourseClick(slide.id)}
-                      className="flex items-center gap-2 bg-[#F26522] hover:bg-[#EE591D] text-white px-7 py-3 rounded-xl font-bold transition-all uppercase tracking-wider text-xs md:text-sm hover:scale-105 active:scale-95 shadow-lg shadow-[#F26522]/30 cursor-pointer"
+                      className="flex items-center gap-2 bg-[#F26522] hover:bg-[#EE591D] text-white px-4 sm:px-6 py-2.5 rounded-xl font-bold transition-all uppercase tracking-wider text-xs md:text-sm hover:scale-[1.03] active:scale-95 shadow-md shadow-[#F26522]/30 cursor-pointer"
                     >
-                      <Play size={16} className="fill-white" /> Regarder
+                      <Play size={15} className="fill-white" /> Regarder
                     </button>
                     <button 
                       onClick={() => onToggleMyList && onToggleMyList(slide.id)}
-                      className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-3 rounded-xl font-bold transition-all uppercase tracking-wider text-xs md:text-sm hover:scale-105 active:scale-95 cursor-pointer"
+                      className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-3.5 sm:px-5 py-2.5 rounded-xl font-bold transition-all uppercase tracking-wider text-xs md:text-sm hover:scale-[1.03] active:scale-95 cursor-pointer"
                     >
-                      {isInList ? <Check size={16} /> : <Plus size={16} />}
+                      {isInList ? <Check size={15} /> : <Plus size={15} />}
                       {isInList ? 'Dans ma liste' : 'Ma Liste'}
                     </button>
                   </div>
@@ -196,13 +196,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onCourseClick, onCategoryClick,
         })}
 
         {/* Indicators */}
-        <div className="absolute bottom-8 right-8 z-20 flex gap-2">
+        <div className="absolute bottom-6 right-6 z-20 flex gap-2">
           {slides.map((_, i) => (
             <button
               key={i} 
               onClick={(e) => { e.stopPropagation(); setCurrentSlide(i); }}
               className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${
-                i === currentSlide ? 'w-8 bg-[#F26522]' : 'w-2 bg-gray-500 hover:bg-gray-300'
+                i === currentSlide ? 'w-6 sm:w-8 bg-[#F26522]' : 'w-2 bg-gray-500 hover:bg-gray-300'
               }`}
             />
           ))}
@@ -210,20 +210,20 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onCourseClick, onCategoryClick,
       </div>
 
       {/* Categories Row */}
-      <div className={`mb-8 relative z-20 ${CONTENT_PADDING}`}>
-        <h3 className="text-xs font-bold text-gray-400 mb-3 uppercase tracking-wider">Parcourir par Catégories</h3>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
+      <div className={`mb-6 md:mb-8 relative z-20 ${CONTENT_PADDING}`}>
+        <h3 className="text-xs font-bold text-gray-400 mb-2.5 uppercase tracking-wider">Parcourir par Catégories</h3>
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-3 md:gap-4">
           {categories.map((cat) => {
             const Icon = cat.icon;
             return (
               <button 
                 key={cat.id}
                 onClick={() => onCategoryClick(cat.id)}
-                className={`relative h-20 md:h-28 bg-gradient-to-br ${cat.color} border border-white/15 rounded-2xl hover:border-[#0E98A8] hover:scale-[1.03] transition-all duration-300 group shadow-md flex items-center justify-center overflow-hidden w-full cursor-pointer`}
+                className={`relative h-16 sm:h-20 md:h-24 bg-gradient-to-br ${cat.color} border border-white/15 rounded-2xl hover:border-[#0E98A8] hover:scale-[1.02] transition-all duration-300 group shadow-md flex items-center justify-center overflow-hidden w-full cursor-pointer`}
               >
-                <div className="z-10 flex flex-col items-center gap-1.5 px-2">
-                  <Icon size={24} className="text-white group-hover:scale-110 transition-transform" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-white text-center leading-tight">{cat.label}</span>
+                <div className="z-10 flex flex-col items-center gap-1 px-1.5">
+                  <Icon size={20} className="text-white group-hover:scale-110 transition-transform sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-white text-center leading-tight">{cat.label}</span>
                 </div>
                 <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
               </button>
@@ -234,33 +234,33 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onCourseClick, onCategoryClick,
 
       {/* Tuteur IA Gemini Banner */}
       {onOpenAiTutor && (
-        <div className={`mb-8 relative z-20 ${CONTENT_PADDING}`}>
-          <div className="bg-gradient-to-r from-[#1A2B32] via-[#0A7A94]/25 to-[#122C34] border border-[#0A7A94]/40 rounded-3xl p-5 md:p-6 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0A7A94] to-[#F26522] flex items-center justify-center text-white shadow-lg shrink-0">
-                <Sparkles size={24} className="animate-pulse" />
+        <div className={`mb-6 md:mb-8 relative z-20 ${CONTENT_PADDING}`}>
+          <div className="bg-gradient-to-r from-[#1A2B32] via-[#0A7A94]/25 to-[#122C34] border border-[#0A7A94]/40 rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-3.5 md:gap-4">
+            <div className="flex items-center gap-3 md:gap-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-[#0A7A94] to-[#F26522] flex items-center justify-center text-white shadow-lg shrink-0">
+                <Sparkles size={20} className="animate-pulse" />
               </div>
-              <div className="space-y-1">
+              <div className="space-y-0.5 md:space-y-1">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-sm md:text-base font-black uppercase tracking-tight text-white">
+                  <h3 className="text-xs sm:text-sm md:text-base font-black uppercase tracking-tight text-white">
                     Tuteur IA Gemini Cercle Hub
                   </h3>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  <span className="text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                     Actif 24/7
                   </span>
                 </div>
-                <p className="text-xs text-gray-300 max-w-2xl leading-relaxed">
-                  Une question sur un module, une formule ou un examen ? Votre tuteur intelligent répond en temps réel sur tous vos cours avec bascule résiliente automatique de modèle.
+                <p className="text-[11px] sm:text-xs text-gray-300 max-w-2xl leading-relaxed">
+                  Une question sur un module, une formule ou un examen ? Votre tuteur intelligent répond en temps réel sur tous vos cours.
                 </p>
               </div>
             </div>
 
             <button
               onClick={onOpenAiTutor}
-              className="w-full md:w-auto px-6 py-3.5 bg-gradient-to-r from-[#F26522] to-[#EE591D] hover:from-[#EE591D] hover:to-[#F26522] text-white rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer shrink-0 hover:scale-105 active:scale-95"
+              className="w-full sm:w-auto px-5 py-2.5 md:py-3 bg-gradient-to-r from-[#F26522] to-[#EE591D] hover:from-[#EE591D] hover:to-[#F26522] text-white rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer shrink-0 hover:scale-[1.02] active:scale-95"
             >
               <span>Consulter le Tuteur IA</span>
-              <ArrowRight size={15} />
+              <ArrowRight size={14} />
             </button>
           </div>
         </div>

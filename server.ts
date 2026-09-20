@@ -299,9 +299,37 @@ Concernant votre question **"${query}"** ${courseTitle} :
 async function startServer() {
   const publicDir = path.join(process.cwd(), "public");
 
+  // Specific high-priority routes for OG images with explicit headers and CORS
+  app.get(["/logoog.png", "/og-image.png"], (req, res) => {
+    const filename = req.path.includes("logoog") ? "logoog.png" : "og-image.png";
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader("Cache-Control", "public, max-age=86400, s-maxage=86400");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.sendFile(path.join(publicDir, filename));
+  });
+
+  app.get(["/logoog.jpg", "/og-image.jpg"], (req, res) => {
+    const filename = req.path.includes("logoog") ? "logoog.jpg" : "og-image.jpg";
+    res.setHeader("Content-Type", "image/jpeg");
+    res.setHeader("Cache-Control", "public, max-age=86400, s-maxage=86400");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.sendFile(path.join(publicDir, filename));
+  });
+
+  app.get("/og-square.png", (_req, res) => {
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader("Cache-Control", "public, max-age=86400, s-maxage=86400");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.sendFile(path.join(publicDir, "og-square.png"));
+  });
+
   // Specific MIME and header handling for PWA files
   app.get("/manifest.webmanifest", (_req, res) => {
     res.setHeader("Content-Type", "application/manifest+json");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.sendFile(path.join(publicDir, "manifest.webmanifest"));
   });
 
@@ -324,14 +352,18 @@ async function startServer() {
       userAgent.includes("telegrambot") ||
       userAgent.includes("slackbot") ||
       userAgent.includes("discordbot") ||
-      userAgent.includes("applebot");
+      userAgent.includes("applebot") ||
+      userAgent.includes("pinterest") ||
+      userAgent.includes("google-structured-data-testing-tool") ||
+      userAgent.includes("meta-externalagent");
 
     // Only intercept HTML / page navigation requests, never assets or API calls
     if (isSocialCrawler && !req.path.startsWith("/api/") && !req.path.includes(".")) {
-      const host = req.get("x-forwarded-host") || req.get("host") || "cerclehub.cd";
+      const host = req.get("x-forwarded-host") || req.get("host") || "ais-dev-ak7p7q77rholofkukxmgvm-161792479595.us-east1.run.app";
       const proto = req.get("x-forwarded-proto") || req.protocol || "https";
       const baseUrl = `${proto}://${host}`;
-      const imageUrl = `${baseUrl}/og-image.png`;
+      const ogLandscapeUrl = `${baseUrl}/og-image.png`;
+      const ogSquareUrl = `${baseUrl}/logoog.png`;
       const appUrl = `${baseUrl}${req.originalUrl || "/"}`;
 
       const title = "CERCLE HUB - Plateforme d'Apprentissage & Leadership | Amanitech";
@@ -350,28 +382,46 @@ async function startServer() {
   <meta property="og:url" content="${appUrl}">
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
-  <meta property="og:image" content="${imageUrl}">
-  <meta property="og:image:secure_url" content="${imageUrl}">
+  
+  <!-- Primary Landscape OG Image (1200x630) -->
+  <meta property="og:image" content="${ogLandscapeUrl}">
+  <meta property="og:image:secure_url" content="${ogLandscapeUrl}">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Logo CERCLE HUB - Amanitech RDC">
+
+  <!-- Secondary Square OG Image (1000x1000) for WhatsApp Compact Chat Cards -->
+  <meta property="og:image" content="${ogSquareUrl}">
+  <meta property="og:image:secure_url" content="${ogSquareUrl}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1000">
+  <meta property="og:image:height" content="1000">
+  <meta property="og:image:alt" content="Logo CERCLE HUB Blanc">
+
+  <link rel="image_src" href="${ogLandscapeUrl}">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="${appUrl}">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
-  <meta name="twitter:image" content="${imageUrl}">
+  <meta name="twitter:image" content="${ogLandscapeUrl}">
   <meta name="twitter:image:alt" content="Logo CERCLE HUB - Amanitech RDC">
 
   <link rel="icon" type="image/svg+xml" href="${baseUrl}/icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="${baseUrl}/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="${baseUrl}/apple-touch-icon.png">
 </head>
-<body style="background:#122C34;color:#ffffff;font-family:sans-serif;padding:40px;text-align:center;">
-  <h1>CERCLE HUB</h1>
-  <p>${description}</p>
-  <img src="${imageUrl}" alt="Cercle Hub Preview" style="max-width:100%;border-radius:16px;margin-top:20px;">
-  <p><a href="${appUrl}" style="color:#0E98A8;text-decoration:none;font-weight:bold;">Accéder à la plateforme Cercle Hub</a></p>
+<body style="background:#122C34;color:#ffffff;font-family:sans-serif;padding:30px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <h1 style="color:#ffffff;margin-bottom:10px;">CERCLE HUB</h1>
+    <p style="color:#94a3b8;font-size:15px;line-height:1.5;">${description}</p>
+    <img src="${ogLandscapeUrl}" alt="Cercle Hub Preview" style="max-width:100%;height:auto;border-radius:12px;margin:20px 0;box-shadow:0 10px 25px rgba(0,0,0,0.3);">
+    <div>
+      <a href="${appUrl}" style="display:inline-block;background:#F26522;color:#ffffff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px;">Accéder à la plateforme Cercle Hub</a>
+    </div>
+  </div>
 </body>
 </html>`;
 

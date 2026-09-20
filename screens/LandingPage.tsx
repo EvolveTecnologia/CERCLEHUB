@@ -145,29 +145,29 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#122C34] via-[#122C34]/70 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#122C34] via-transparent to-transparent" />
             
-            <div className="absolute top-0 left-0 h-full flex flex-col justify-center px-6 md:px-16 max-w-2xl pt-20">
-              <div className="inline-flex items-center gap-2 mb-3 animate-in slide-in-from-left-4 fade-in duration-700 delay-100">
+            <div className="absolute top-0 left-0 h-full flex flex-col justify-center px-5 sm:px-8 md:px-14 max-w-2xl pt-16 md:pt-12">
+              <div className="inline-flex items-center gap-2 mb-2 animate-in slide-in-from-left-4 fade-in duration-700 delay-100">
                 <span className="w-2 h-2 rounded-full bg-[#F26522] animate-pulse" />
-                <span className="text-[#0E98A8] font-bold tracking-widest uppercase text-[11px] md:text-xs">
+                <span className="text-[#0E98A8] font-bold tracking-widest uppercase text-[10px] md:text-xs">
                   {slide.category}
                 </span>
               </div>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase leading-tight mb-4 drop-shadow-2xl animate-in slide-in-from-left-4 fade-in duration-700 delay-200">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-tight mb-3 drop-shadow-xl animate-in slide-in-from-left-4 fade-in duration-700 delay-200 tracking-tight">
                 {slide.title}
               </h1>
-              <p className="text-gray-200 text-xs md:text-base mb-8 leading-relaxed line-clamp-3 md:line-clamp-none animate-in slide-in-from-left-4 fade-in duration-700 delay-300">
+              <p className="text-gray-200 text-xs md:text-sm lg:text-base mb-6 leading-relaxed line-clamp-3 md:line-clamp-none animate-in slide-in-from-left-4 fade-in duration-700 delay-300 max-w-xl">
                 {slide.description}
               </p>
-              <div className="flex items-center gap-4 animate-in slide-in-from-bottom-4 fade-in duration-700 delay-500">
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 animate-in slide-in-from-bottom-4 fade-in duration-700 delay-500">
                 <button 
                   onClick={onEnter}
-                  className="bg-[#F26522] hover:bg-[#EE591D] text-white px-8 py-3.5 md:py-4 rounded-xl font-black uppercase tracking-widest text-xs md:text-sm transition-all transform hover:scale-105 shadow-[0_0_25px_rgba(242,101,34,0.4)] cursor-pointer"
+                  className="bg-[#F26522] hover:bg-[#EE591D] text-white px-5 sm:px-6 py-3 rounded-xl font-extrabold uppercase tracking-wider text-xs transition-all transform hover:scale-[1.03] active:scale-95 shadow-lg shadow-[#F26522]/30 cursor-pointer w-full sm:w-auto text-center"
                 >
                   COMMENCER MAINTENANT
                 </button>
                 <button 
                   onClick={() => setCurrentView('about')}
-                  className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-6 py-3.5 md:py-4 rounded-xl font-bold uppercase tracking-widest text-xs md:text-sm transition-all cursor-pointer"
+                  className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 sm:px-5 py-3 rounded-xl font-bold uppercase tracking-wider text-xs transition-all cursor-pointer w-full sm:w-auto text-center"
                 >
                   Découvrir Amanitech
                 </button>
@@ -189,19 +189,19 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
       </section>
 
       {/* --- BRAND HUBS (6 Categories) --- */}
-      <section className="px-6 md:px-16 -mt-12 relative z-20 mb-16">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <section className="px-5 sm:px-8 md:px-14 -mt-10 md:-mt-12 relative z-20 mb-12 md:mb-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
           {brandCategories.map((hub, idx) => {
             const Icon = hub.icon;
             return (
               <div 
                 key={idx} 
                 onClick={() => onEnter()} 
-                className={`h-24 md:h-32 rounded-2xl bg-gradient-to-br ${hub.grad} border border-white/15 flex flex-col items-center justify-center gap-2 shadow-xl hover:scale-105 transition-transform cursor-pointer group relative overflow-hidden`}
+                className={`h-20 sm:h-24 md:h-28 rounded-2xl bg-gradient-to-br ${hub.grad} border border-white/15 flex flex-col items-center justify-center gap-1.5 md:gap-2 shadow-lg hover:scale-[1.03] transition-transform cursor-pointer group relative overflow-hidden`}
               >
                 <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <Icon size={28} className="text-white drop-shadow-md" />
-                <span className="font-bold text-xs md:text-xs tracking-wider uppercase text-center px-2">{hub.label}</span>
+                <Icon size={22} className="text-white drop-shadow-md group-hover:scale-110 transition-transform" />
+                <span className="font-bold text-[11px] sm:text-xs tracking-wide uppercase text-center px-2 leading-tight">{hub.label}</span>
               </div>
             );
           })}

@@ -24,37 +24,37 @@ const ImpactPage: React.FC<PageProps> = ({ onBack, onViewChange }) => {
         <span className="text-xs font-bold text-[#F26522] uppercase tracking-widest">Impact Social • RDC</span>
       </div>
       
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-        <div className="text-center max-w-4xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-100 border border-emerald-300 rounded-full mb-6">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 py-10 sm:py-14 md:py-16">
+        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-emerald-100 border border-emerald-300 rounded-full mb-4 sm:mb-6">
             <Leaf size={14} className="text-emerald-700" />
-            <span className="text-xs font-bold text-emerald-800 uppercase tracking-widest">RSE, ESG & Objectifs de Développement Durable</span>
+            <span className="text-[11px] sm:text-xs font-bold text-emerald-800 uppercase tracking-wider sm:tracking-widest">RSE, ESG & Objectifs de Développement Durable</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-[#122C34] uppercase leading-tight mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-[#122C34] uppercase leading-tight mb-4 sm:mb-6">
             Transformation <br />
             <span className="text-[#0A7A94]">Économique, Sociale</span> & Capital Humain
           </h1>
-          <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed max-w-3xl mx-auto">
             Par le biais d'<strong>Amanitech</strong>, la plateforme <strong>Cercle Hub</strong> déploie des méthodologies pédagogiques axées sur l'impact tangible. Nous ne diffusons pas uniquement du contenu : nous favorisons l'émancipation, l'emploi décent et le développement des compétences professionnelles en République Démocratique du Congo.
           </p>
         </div>
 
         {/* 4 Methodologies */}
-        <div className="space-y-6 mb-24 max-w-4xl mx-auto">
-          <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-200 flex flex-col md:flex-row items-start gap-6 shadow-sm">
-            <div className="w-12 h-12 rounded-2xl bg-[#0A7A94] text-white flex items-center justify-center font-bold text-lg shrink-0">
+        <div className="space-y-4 sm:space-y-6 mb-16 sm:mb-20 md:mb-24 max-w-4xl mx-auto">
+          <div className="bg-white p-5 sm:p-6 md:p-8 rounded-2xl md:rounded-3xl border border-gray-200 flex flex-col sm:flex-row items-start gap-4 sm:gap-6 shadow-sm">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#0A7A94] text-white flex items-center justify-center font-bold text-base sm:text-lg shrink-0">
               1
             </div>
             <div>
-              <h3 className="text-lg font-bold text-[#122C34] mb-2">Formation Orientée vers l'Employabilité Directe</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <h3 className="text-base sm:text-lg font-bold text-[#122C34] mb-1 sm:mb-2">Formation Orientée vers l'Employabilité Directe</h3>
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                 Nos parcours sont conçus en rétro-ingénierie (Backward Design) : nous analysons les besoins réels des entreprises locales à Kinshasa et dans les provinces pour former aux compétences techniques et comportementales recherchées.
               </p>
             </div>
           </div>
 
-          <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-200 flex flex-col md:flex-row items-start gap-6 shadow-sm">
-            <div className="w-12 h-12 rounded-2xl bg-[#F26522] text-white flex items-center justify-center font-bold text-lg shrink-0">
+          <div className="bg-white p-5 sm:p-6 md:p-8 rounded-2xl md:rounded-3xl border border-gray-200 flex flex-col sm:flex-row items-start gap-4 sm:gap-6 shadow-sm">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#F26522] text-white flex items-center justify-center font-bold text-base sm:text-lg shrink-0">
               2
             </div>
             <div>

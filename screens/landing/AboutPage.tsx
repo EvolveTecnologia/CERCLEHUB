@@ -25,37 +25,37 @@ const AboutPage: React.FC<PageProps> = ({ onBack, onViewChange }) => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative py-20 px-6 md:px-12 overflow-hidden bg-gradient-to-b from-white to-[#F9F9F6] border-b border-gray-200">
-        <div className="max-w-5xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0A7A94]/10 border border-[#0A7A94]/20 rounded-full">
+      <section className="relative py-12 sm:py-16 md:py-20 px-5 sm:px-8 md:px-12 overflow-hidden bg-gradient-to-b from-white to-[#F9F9F6] border-b border-gray-200">
+        <div className="max-w-5xl mx-auto text-center space-y-4 sm:space-y-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#0A7A94]/10 border border-[#0A7A94]/20 rounded-full">
             <span className="w-2 h-2 rounded-full bg-[#F26522] animate-pulse" />
-            <span className="text-xs font-black uppercase tracking-[0.2em] text-[#0A7A94]">Amanitech • Cercle Hub</span>
+            <span className="text-[11px] sm:text-xs font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#0A7A94]">Amanitech • Cercle Hub</span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-black uppercase leading-tight tracking-tight text-[#122C34]">
-            Un Écosystème Éducatif qui Transforme <br />
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase leading-tight tracking-tight text-[#122C34]">
+            Un Écosystème Éducatif qui Transforme <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0A7A94] via-[#0E98A8] to-[#F26522]">
               les Compétences en Avenir Durable
             </span>
           </h1>
           
-          <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed font-normal">
             Cercle Hub, initiative technologique d'<strong>Amanitech</strong>, est une infrastructure numérique dédiée à l'autonomisation des professionnels, des leaders et des jeunes en République Démocratique du Congo et sur tout le continent africain.
           </p>
         </div>
       </section>
 
       {/* Qui Sommes-Nous */}
-      <section className="py-20 px-6 md:px-16 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
+      <section className="py-12 sm:py-16 md:py-20 px-5 sm:px-8 md:px-16 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+          <div className="space-y-5">
             <div className="inline-flex items-center gap-2 text-xs font-black text-[#F26522] uppercase tracking-widest">
               <span>Notre Identité & Ambition</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#122C34] leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#122C34] leading-tight">
               Une infrastructure permanente de développement du capital humain.
             </h2>
-            <div className="space-y-4 text-gray-600 text-sm md:text-base leading-relaxed">
+            <div className="space-y-3.5 text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed">
               <p>
                 <strong>Amanitech</strong> a conçu la plateforme <strong>Cercle Hub</strong> pour répondre aux défis majeurs de la formation continue, de l'employabilité et de la transformation numérique en RDC.
               </p>

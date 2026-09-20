@@ -24,34 +24,34 @@ const TechnologyPage: React.FC<PageProps> = ({ onBack, onViewChange }) => {
         <span className="text-xs font-bold text-[#F26522] uppercase tracking-widest">Technologie • Cercle Hub</span>
       </div>
       
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 py-10 sm:py-14 md:py-16">
         {/* Hero Section */}
-        <div className="flex flex-col md:flex-row gap-16 items-center mb-24">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-center mb-14 sm:mb-18 md:mb-24">
           <div className="md:w-1/2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0A7A94]/10 border border-[#0A7A94]/20 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0A7A94]/10 border border-[#0A7A94]/20 rounded-full mb-4 sm:mb-6">
               <Brain size={14} className="text-[#0A7A94]" />
-              <span className="text-[11px] font-bold text-[#0A7A94] uppercase tracking-wider">Moteur d'Apprentissage Adaptatif</span>
+              <span className="text-[10px] sm:text-[11px] font-bold text-[#0A7A94] uppercase tracking-wider">Moteur d'Apprentissage Adaptatif</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-black text-[#122C34] uppercase leading-tight mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-[#122C34] uppercase leading-tight mb-4 sm:mb-6">
               Apprentissage <br />
               <span className="text-[#0A7A94]">Intelligent</span> & Données d'Impact
             </h1>
-            <p className="text-base text-gray-600 leading-relaxed mb-8">
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed mb-6 sm:mb-8">
               Bien plus que des vidéos, nous déployons une architecture technologique avancée conçue par <strong>Amanitech</strong>. Notre système analyse la progression des apprenants en temps réel pour recommander les modules ciblés, valider les acquis et accélérer l'insertion sur le marché du travail en RDC.
             </p>
             
-            <div className="grid grid-cols-3 gap-6 border-t border-gray-200 pt-8">
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 border-t border-gray-200 pt-6 sm:pt-8">
               <div className="space-y-1">
-                <span className="text-3xl font-black text-[#122C34] block">99.9%</span>
-                <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Disponibilité</span>
+                <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#122C34] block">99.9%</span>
+                <span className="text-[9px] sm:text-[10px] text-gray-500 uppercase font-bold tracking-wider sm:tracking-widest">Disponibilité</span>
               </div>
               <div className="space-y-1">
-                <span className="text-3xl font-black text-[#F26522] block">HD/4K</span>
-                <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Flux Adaptatif</span>
+                <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#F26522] block">HD/4K</span>
+                <span className="text-[9px] sm:text-[10px] text-gray-500 uppercase font-bold tracking-wider sm:tracking-widest">Flux Adaptatif</span>
               </div>
               <div className="space-y-1">
-                <span className="text-3xl font-black text-[#0A7A94] block">LMS</span>
-                <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Intégré</span>
+                <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#0A7A94] block">LMS</span>
+                <span className="text-[9px] sm:text-[10px] text-gray-500 uppercase font-bold tracking-wider sm:tracking-widest">Intégré</span>
               </div>
             </div>
           </div>

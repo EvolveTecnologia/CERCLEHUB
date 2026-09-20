@@ -116,42 +116,42 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({
       </div>
 
       {/* Info Area */}
-      <div className="w-full -mt-28 relative z-10 px-6 md:px-12 pb-6 max-w-6xl mx-auto">
-        <div className="space-y-3">
-          <h1 className="text-2xl md:text-5xl font-black text-white leading-tight uppercase tracking-tight drop-shadow-2xl break-words">
+      <div className="w-full -mt-24 sm:-mt-28 relative z-10 px-4 sm:px-8 md:px-12 pb-6 max-w-6xl mx-auto">
+        <div className="space-y-2.5 sm:space-y-3">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white leading-tight uppercase tracking-tight drop-shadow-xl break-words">
             {course.title}
           </h1>
-          <p className="text-[#0E98A8] text-xs md:text-base font-bold">
+          <p className="text-[#0E98A8] text-xs sm:text-sm font-bold">
             {course.category} • Formateur : {course.instructor}
           </p>
-          <p className="text-gray-300 text-xs md:text-sm max-w-3xl leading-relaxed">
+          <p className="text-gray-300 text-xs sm:text-sm max-w-3xl leading-relaxed line-clamp-3 md:line-clamp-none">
             {course.description}
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap gap-3 pt-4">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2 sm:pt-3">
             <button 
               onClick={() => course.modules?.[0]?.lessons?.[0] && onLessonClick(course.modules[0].lessons[0])}
-              className="flex-1 md:flex-none md:w-72 flex items-center justify-center gap-3 bg-[#F26522] hover:bg-[#EE591D] text-white py-4 rounded-xl font-bold transition-transform active:scale-95 shadow-xl uppercase tracking-wider text-xs cursor-pointer"
+              className="flex-1 sm:flex-none sm:w-64 flex items-center justify-center gap-2.5 bg-[#F26522] hover:bg-[#EE591D] text-white py-3 sm:py-3.5 px-5 rounded-xl font-bold transition-transform active:scale-95 shadow-md uppercase tracking-wider text-xs cursor-pointer"
             >
-              <Play size={18} fill="currentColor" /> REGARDER MAINTENANT
+              <Play size={16} fill="currentColor" /> REGARDER MAINTENANT
             </button>
             <button 
               onClick={() => setActiveTab('tuteur')}
-              className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#0A7A94] to-[#0E98A8] hover:from-[#0E98A8] hover:to-[#0A7A94] text-white rounded-xl font-bold transition-all shadow-xl uppercase tracking-wider text-xs cursor-pointer border border-white/15"
+              className="flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-3.5 bg-gradient-to-r from-[#0A7A94] to-[#0E98A8] hover:from-[#0E98A8] hover:to-[#0A7A94] text-white rounded-xl font-bold transition-all shadow-md uppercase tracking-wider text-xs cursor-pointer border border-white/15"
             >
-              <Sparkles size={16} className="text-amber-300" /> Poser une question à l'IA
+              <Sparkles size={15} className="text-amber-300" /> Poser une question à l'IA
             </button>
-            <button className="w-14 flex-shrink-0 flex items-center justify-center bg-[#1A2B32] border border-white/10 rounded-xl hover:bg-[#1A2B32]/80 transition-colors text-white shadow-xl cursor-pointer">
-              <Download size={20} />
+            <button className="w-11 h-11 flex-shrink-0 flex items-center justify-center bg-[#1A2B32] border border-white/10 rounded-xl hover:bg-[#1A2B32]/80 transition-colors text-white shadow-md cursor-pointer" title="Télécharger">
+              <Download size={18} />
             </button>
           </div>
         </div>
       </div>
 
       {/* Tabs Navigation */}
-      <div className="border-b border-white/10 px-6 md:px-12 max-w-6xl mx-auto">
-        <div className="flex gap-8 overflow-x-auto hide-scrollbar">
+      <div className="border-b border-white/10 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto">
+        <div className="flex gap-4 sm:gap-6 md:gap-8 overflow-x-auto hide-scrollbar">
           {[
             { id: 'lecons', label: 'Leçons & Modules' },
             { id: 'supports', label: 'Supports Pédagogiques' },
