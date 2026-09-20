@@ -31,7 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab, onLo
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={onLogout} />
       
       {/* Main Content - pl-[100px] to match collapsed sidebar width */}
-      <main className="flex-1 md:pl-[100px] transition-all duration-300 w-full relative z-0 overflow-y-auto h-screen">
+      <main className="flex-1 md:pl-[100px] transition-all duration-300 w-full relative z-0 overflow-y-auto h-screen hide-scrollbar">
         {children}
       </main>
     </div>

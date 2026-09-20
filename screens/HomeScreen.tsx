@@ -117,7 +117,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onCourseClick, onCategoryClick,
     <div className="pb-24 bg-[#122C34] min-h-screen font-sans relative text-white">
       
       {/* Mobile Logo Header */}
-      <div className="fixed top-0 left-0 w-full z-50 px-5 py-3 flex justify-between items-center md:hidden bg-gradient-to-b from-[#122C34] via-[#122C34]/90 to-transparent pointer-events-none">
+      <div className="fixed top-0 left-0 w-full z-50 px-4 py-3 flex justify-start items-center md:hidden bg-gradient-to-b from-[#122C34] via-[#122C34]/90 to-transparent pointer-events-none">
         <div className="pointer-events-auto">
           <Logo inverted={true} className="h-8 w-auto drop-shadow-md" />
         </div>

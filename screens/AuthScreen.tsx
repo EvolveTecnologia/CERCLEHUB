@@ -33,6 +33,24 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ onLogin, onBack }) => {
   });
   const [termsAccepted, setTermsAccepted] = useState(false);
 
+  const handleInstallClick = async () => {
+    // 1. Android / Chrome / Edge / Samsung Internet: trigger native OS installation without any custom popup
+    if (pwa.deferredPrompt || pwa.isInstallable) {
+      try {
+        const res = await pwa.install('android');
+        if (res.success || res.mode === 'native-prompt' || res.mode === 'already-installed') {
+          return;
+        }
+      } catch (e) {
+        console.warn('Native prompt error:', e);
+      }
+      setIsInstallModalOpen(true);
+    } else {
+      // 2. iOS Safari (iPhone / iPad) or manual fallback: open illustrated guide with high-res official brand assets
+      setIsInstallModalOpen(true);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -178,7 +196,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ onLogin, onBack }) => {
       <div className="pt-2 border-t border-white/10">
         <button
           type="button"
-          onClick={() => setIsInstallModalOpen(true)}
+          onClick={handleInstallClick}
           className="w-full py-2.5 px-3 bg-gradient-to-r from-[#0A7A94]/25 via-[#0E98A8]/15 to-[#F26522]/20 hover:from-[#0A7A94]/40 hover:to-[#F26522]/30 border border-[#0E98A8]/35 hover:border-[#F26522]/50 rounded-2xl flex items-center justify-between transition-all group shadow-md hover:shadow-cyan-950/30 text-left cursor-pointer"
         >
           <div className="flex items-center gap-2.5">

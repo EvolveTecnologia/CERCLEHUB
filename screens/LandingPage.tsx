@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Monitor, Smartphone, Tablet, Tv, ChevronDown, GraduationCap, Leaf, Cpu, Utensils, Briefcase, Globe } from 'lucide-react';
+import { Monitor, Smartphone, Tablet, Tv, ChevronDown, GraduationCap, Leaf, Cpu, Utensils, Briefcase, Globe, Download, Share2 } from 'lucide-react';
 import { COURSES } from '../constants';
 import { Category } from '../types';
 import CourseCard from '../components/CourseCard';
@@ -120,14 +120,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
     <div className="min-h-screen bg-[#122C34] font-sans text-white overflow-x-hidden animate-in fade-in duration-500">
       
       {/* --- NAVBAR (Sticky) --- */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 md:px-12 py-3 flex justify-between items-center ${scrolled ? 'bg-[#122C34]/95 backdrop-blur-md shadow-lg border-b border-[#0A7A94]/20' : 'bg-gradient-to-b from-[#122C34]/90 to-transparent'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6 md:px-12 py-3 flex justify-between items-center ${scrolled ? 'bg-[#122C34]/95 backdrop-blur-md shadow-lg border-b border-[#0A7A94]/20' : 'bg-gradient-to-b from-[#122C34]/90 to-transparent'}`}>
         <div className="flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <Logo inverted={true} className="h-10 md:h-12" />
+          <Logo inverted={true} className="h-9 sm:h-10 md:h-12" />
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <button 
             onClick={onEnter}
-            className="px-6 py-2.5 bg-[#F26522] hover:bg-[#EE591D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:scale-105 active:scale-95 cursor-pointer"
+            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-[#F26522] hover:bg-[#EE591D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:scale-105 active:scale-95 cursor-pointer"
           >
             Connexion
           </button>

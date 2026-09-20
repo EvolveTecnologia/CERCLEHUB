@@ -155,6 +155,7 @@ export function usePWAInstall() {
     isMobileOrTablet,
     canShare,
     install,
+    deferredPrompt: deferredPrompt || window.deferredPWAInstallPrompt,
     promptEvent: deferredPrompt || window.deferredPWAInstallPrompt,
   };
 }
