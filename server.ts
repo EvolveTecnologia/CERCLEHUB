@@ -340,6 +340,27 @@ async function startServer() {
     res.sendFile(path.join(publicDir, "sw.js"));
   });
 
+  // Explicit handlers for social media and Open Graph images with high-compatibility headers
+  const ogAssetRoutes = [
+    { path: "/og-image.jpg", file: "og-image.jpg", type: "image/jpeg" },
+    { path: "/og-image.png", file: "og-image.png", type: "image/png" },
+    { path: "/og-edtech.jpg", file: "og-edtech.jpg", type: "image/jpeg" },
+    { path: "/og-edtech.png", file: "og-edtech.png", type: "image/png" },
+    { path: "/logoog.jpg", file: "logoog.jpg", type: "image/jpeg" },
+    { path: "/logoog.png", file: "logoog.png", type: "image/png" },
+    { path: "/og-square.jpg", file: "og-square.jpg", type: "image/jpeg" },
+    { path: "/og-square.png", file: "og-square.png", type: "image/png" },
+  ];
+
+  ogAssetRoutes.forEach(({ path: routePath, file, type }) => {
+    app.get(routePath, (_req, res) => {
+      res.setHeader("Content-Type", type);
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Cache-Control", "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800");
+      res.sendFile(path.join(publicDir, file));
+    });
+  });
+
   // Dedicated Open Graph responder for WhatsApp, Facebook, LinkedIn, Twitter/X, Telegram crawlers
   app.use((req, res, next) => {
     const userAgent = (req.get("user-agent") || "").toLowerCase();
@@ -359,15 +380,17 @@ async function startServer() {
 
     // Only intercept HTML / page navigation requests, never assets or API calls
     if (isSocialCrawler && !req.path.startsWith("/api/") && !req.path.includes(".")) {
-      const host = req.get("x-forwarded-host") || req.get("host") || "ais-dev-ak7p7q77rholofkukxmgvm-161792479595.us-east1.run.app";
+      const rawHost = req.get("x-forwarded-host") || req.get("host") || "";
+      const host = rawHost.includes("localhost") || !rawHost ? "cerclehub.vercel.app" : rawHost;
       const proto = req.get("x-forwarded-proto") || req.protocol || "https";
       const baseUrl = `${proto}://${host}`;
-      const ogLandscapeUrl = `${baseUrl}/og-image.png`;
-      const ogSquareUrl = `${baseUrl}/logoog.png`;
+      const ogJpgUrl = `${baseUrl}/og-image.jpg`;
+      const ogPngUrl = `${baseUrl}/og-image.png`;
+      const ogSquareUrl = `${baseUrl}/og-square.jpg`;
       const appUrl = `${baseUrl}${req.originalUrl || "/"}`;
 
-      const title = "CERCLE HUB - Plateforme d'Apprentissage & Leadership | Amanitech";
-      const description = "Une expérience éducative premium sous forme de streaming, conçue pour former et autonomiser les leaders, professionnels et acteurs du changement en République Démocratique du Congo.";
+      const title = "CERCLE HUB - Technologie Éducative & Leadership | Amanitech";
+      const description = "Plateforme de streaming pédagogique et de formations professionnelles certifiantes, conçue pour former et autonomiser les leaders et talents en République Démocratique du Congo.";
 
       const socialHtml = `<!DOCTYPE html>
 <html lang="fr" prefix="og: https://ogp.me/ns#">
@@ -383,31 +406,39 @@ async function startServer() {
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   
-  <!-- Primary Landscape OG Image (1200x630) -->
-  <meta property="og:image" content="${ogLandscapeUrl}">
-  <meta property="og:image:secure_url" content="${ogLandscapeUrl}">
+  <!-- Primary Landscape OG Image (1200x630 JPEG for optimal WhatsApp rendering) -->
+  <meta property="og:image" content="${ogJpgUrl}">
+  <meta property="og:image:secure_url" content="${ogJpgUrl}">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cercle Hub - Technologie Éducative en RDC">
+
+  <!-- Secondary PNG fallback -->
+  <meta property="og:image" content="${ogPngUrl}">
+  <meta property="og:image:secure_url" content="${ogPngUrl}">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Logo CERCLE HUB - Amanitech RDC">
 
-  <!-- Secondary Square OG Image (1000x1000) for WhatsApp Compact Chat Cards -->
+  <!-- Square OG Image for WhatsApp Compact Chat Cards -->
   <meta property="og:image" content="${ogSquareUrl}">
   <meta property="og:image:secure_url" content="${ogSquareUrl}">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1000">
-  <meta property="og:image:height" content="1000">
-  <meta property="og:image:alt" content="Logo CERCLE HUB Blanc">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="800">
+  <meta property="og:image:alt" content="Logo Cercle Hub Officiel">
 
-  <link rel="image_src" href="${ogLandscapeUrl}">
+  <link rel="image_src" href="${ogJpgUrl}">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@cerclehub">
   <meta name="twitter:url" content="${appUrl}">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
-  <meta name="twitter:image" content="${ogLandscapeUrl}">
-  <meta name="twitter:image:alt" content="Logo CERCLE HUB - Amanitech RDC">
+  <meta name="twitter:image" content="${ogJpgUrl}">
+  <meta name="twitter:image:alt" content="Cercle Hub - Technologie Éducative en RDC">
 
   <link rel="icon" type="image/svg+xml" href="${baseUrl}/icon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="${baseUrl}/favicon-32x32.png">
@@ -417,7 +448,7 @@ async function startServer() {
   <div style="max-width:600px;margin:0 auto;">
     <h1 style="color:#ffffff;margin-bottom:10px;">CERCLE HUB</h1>
     <p style="color:#94a3b8;font-size:15px;line-height:1.5;">${description}</p>
-    <img src="${ogLandscapeUrl}" alt="Cercle Hub Preview" style="max-width:100%;height:auto;border-radius:12px;margin:20px 0;box-shadow:0 10px 25px rgba(0,0,0,0.3);">
+    <img src="${ogJpgUrl}" alt="Cercle Hub Preview" style="max-width:100%;height:auto;border-radius:12px;margin:20px 0;box-shadow:0 10px 25px rgba(0,0,0,0.3);">
     <div>
       <a href="${appUrl}" style="display:inline-block;background:#F26522;color:#ffffff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px;">Accéder à la plateforme Cercle Hub</a>
     </div>

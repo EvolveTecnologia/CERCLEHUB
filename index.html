@@ -15,34 +15,55 @@
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="CERCLE HUB">
-    <meta property="og:url" content="https://ais-dev-ak7p7q77rholofkukxmgvm-161792479595.us-east1.run.app/">
-    <meta property="og:title" content="CERCLE HUB - Plateforme d'Apprentissage &amp; Leadership | Amanitech">
-    <meta property="og:description" content="Une expérience éducative premium sous forme de streaming, conçue pour former et autonomiser les leaders, professionnels et acteurs du changement en République Démocratique du Congo.">
+    <meta property="og:url" content="https://cerclehub.vercel.app/">
+    <meta property="og:title" content="CERCLE HUB - Technologie Éducative &amp; Leadership | Amanitech">
+    <meta property="og:description" content="Plateforme de streaming pédagogique et de formations professionnelles certifiantes, conçue pour former et autonomiser les leaders et talents en République Démocratique du Congo.">
     
-    <!-- Primary OG Landscape Image (1200x630) -->
-    <meta property="og:image" content="https://ais-dev-ak7p7q77rholofkukxmgvm-161792479595.us-east1.run.app/og-image.png">
-    <meta property="og:image:secure_url" content="https://ais-dev-ak7p7q77rholofkukxmgvm-161792479595.us-east1.run.app/og-image.png">
+    <!-- Primary OG Landscape Image (1200x630 JPEG for 100% WhatsApp / Social compatibility) -->
+    <meta property="og:image" content="https://cerclehub.vercel.app/og-image.jpg">
+    <meta property="og:image:secure_url" content="https://cerclehub.vercel.app/og-image.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="CERCLE HUB - Plateforme de Technologie Éducative &amp; Leadership Amanitech RDC">
+
+    <!-- Secondary OG PNG Fallback -->
+    <meta property="og:image" content="https://cerclehub.vercel.app/og-image.png">
+    <meta property="og:image:secure_url" content="https://cerclehub.vercel.app/og-image.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Logo CERCLE HUB - Plateforme Pédagogique Amanitech RDC">
 
-    <!-- Secondary OG Square Image (1000x1000) for WhatsApp mobile card compatibility -->
-    <meta property="og:image" content="https://ais-dev-ak7p7q77rholofkukxmgvm-161792479595.us-east1.run.app/logoog.png">
-    <meta property="og:image:secure_url" content="https://ais-dev-ak7p7q77rholofkukxmgvm-161792479595.us-east1.run.app/logoog.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1000">
-    <meta property="og:image:height" content="1000">
-    <meta property="og:image:alt" content="Logo CERCLE HUB Blanc">
+    <!-- Square OG Image (800x800) for WhatsApp compact mobile cards -->
+    <meta property="og:image" content="https://cerclehub.vercel.app/og-square.jpg">
+    <meta property="og:image:secure_url" content="https://cerclehub.vercel.app/og-square.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="800">
+    <meta property="og:image:alt" content="Logo Cercle Hub Officiel">
 
-    <link rel="image_src" href="https://ais-dev-ak7p7q77rholofkukxmgvm-161792479595.us-east1.run.app/og-image.png">
+    <link rel="image_src" href="https://cerclehub.vercel.app/og-image.jpg">
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="CERCLE HUB - Plateforme d'Apprentissage &amp; Leadership | Amanitech">
-    <meta name="twitter:description" content="Formations certifiantes, masterclasses professionnelles et tutorat intelligent pour les leaders et talents en RDC.">
-    <meta name="twitter:image" content="https://ais-dev-ak7p7q77rholofkukxmgvm-161792479595.us-east1.run.app/og-image.png">
-    <meta name="twitter:image:alt" content="Logo CERCLE HUB Amanitech">
+    <meta name="twitter:site" content="@cerclehub">
+    <meta name="twitter:title" content="CERCLE HUB - Technologie Éducative &amp; Leadership | Amanitech">
+    <meta name="twitter:description" content="Formations certifiantes, streaming pédagogique et tutorat intelligent IA Gemini pour les leaders et talents en RDC.">
+    <meta name="twitter:image" content="https://cerclehub.vercel.app/og-image.jpg">
+    <meta name="twitter:image:alt" content="Cercle Hub - Technologie Éducative en RDC">
+
+    <!-- Dynamic Origin OG Synchronizer for client execution -->
+    <script>
+      (function() {
+        try {
+          if (window.location.origin && !window.location.origin.includes('file://')) {
+            var origin = window.location.origin;
+            var ogUrl = document.querySelector('meta[property="og:url"]');
+            if (ogUrl) ogUrl.setAttribute('content', origin + window.location.pathname);
+          }
+        } catch(e) {}
+      })();
+    </script>
 
     <!-- PWA & Mobile Optimization -->
     <link rel="manifest" href="/manifest.webmanifest">

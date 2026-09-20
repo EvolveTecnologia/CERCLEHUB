@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   CreditCard, ShieldCheck, HelpCircle, 
   LogOut, Settings, Award, ChevronLeft, 
-  ChevronRight, ExternalLink
+  ChevronRight, ExternalLink, Download, Smartphone 
 } from 'lucide-react';
 import { UserProfile, Certificate } from '../types';
 
@@ -10,6 +10,9 @@ import AccountScreen from './profile/AccountScreen';
 import LegalScreen from './profile/LegalScreen';
 import SupportScreen from './profile/SupportScreen';
 import SettingsScreen from './profile/SettingsScreen';
+import { CertificateViewerModal } from '../components/CertificateViewerModal';
+import { PWAInstallModal } from '../components/PWAInstallModal';
+import { usePWAInstall } from '../components/usePWAInstall';
 
 type SubViewType = 'account' | 'certs' | 'privacy' | 'support' | 'settings' | null;
 
@@ -20,6 +23,16 @@ interface ProfileScreenProps {
 const ProfileScreen: React.FC<ProfileScreenProps> = ({ onLogout }) => {
   const [activeSubView, setActiveSubView] = useState<SubViewType>(null);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+  const [showInstallModal, setShowInstallModal] = useState(false);
+
+  const {
+    isInstallable,
+    isInstalled,
+    isIOS,
+    isAndroid,
+    install,
+  } = usePWAInstall();
   
   const [user, setUser] = useState<UserProfile>({
     name: 'Placide Baundja Ikuba',
@@ -46,7 +59,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ onLogout }) => {
   ];
 
   const renderContent = () => {
-    if (!activeSubView && window.innerWidth >= 768) {
+    if (!activeSubView && typeof window !== 'undefined' && window.innerWidth >= 768) {
       return (
         <div className="flex flex-col items-center justify-center h-full text-center text-gray-400 p-10 select-none">
           <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mb-5 border border-white/10">
@@ -62,38 +75,78 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ onLogout }) => {
 
     switch (activeSubView) {
       case 'account':
-        return <AccountScreen user={user} onUpdate={setUser} />;
+        return (
+          <div className="pb-28 sm:pb-32 hide-scrollbar">
+            <AccountScreen user={user} onUpdate={setUser} />
+          </div>
+        );
       case 'privacy':
-        return <LegalScreen />;
+        return (
+          <div className="pb-28 sm:pb-32 hide-scrollbar">
+            <LegalScreen />
+          </div>
+        );
       case 'support':
-        return <SupportScreen />;
+        return (
+          <div className="pb-28 sm:pb-32 hide-scrollbar">
+            <SupportScreen />
+          </div>
+        );
       case 'settings':
-        return <SettingsScreen />;
+        return (
+          <div className="pb-28 sm:pb-32 hide-scrollbar">
+            <SettingsScreen />
+          </div>
+        );
       case 'certs':
         return (
-          <div className="p-6 md:p-10 space-y-6 animate-in fade-in duration-300">
-            <h2 className="text-xl font-bold uppercase tracking-tight text-white">Mes Certificats Numériques</h2>
-            <p className="text-gray-300 text-xs leading-relaxed">
-              Consultez et téléchargez vos attestations officielles délivrées par Cercle Hub et propulsées par Amanitech. Chaque document dispose d'une clé de vérification cryptographique infalsifiable.
-            </p>
+          <div className="p-4 sm:p-6 md:p-10 space-y-6 animate-in fade-in duration-300 pb-36 md:pb-24 hide-scrollbar">
+            <div className="space-y-1">
+              <h2 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-white">
+                Mes Certificats Numériques
+              </h2>
+              <p className="text-gray-300 text-xs leading-relaxed max-w-2xl">
+                Consultez et téléchargez vos attestations officielles délivrées par Cercle Hub et propulsées par Amanitech. Chaque document dispose d'une clé de vérification cryptographique infalsifiable.
+              </p>
+            </div>
             
-            <div className="grid grid-cols-1 gap-4 pt-2">
-              {certificates.map(cert => (
-                <div key={cert.id} className="bg-[#1A2B32] border border-white/10 rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-4 hover:border-[#0A7A94] transition-all">
-                  <div className="flex items-center gap-4 w-full md:w-auto">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0A7A94] to-[#0E98A8] text-white rounded-xl flex items-center justify-center shadow-lg shrink-0">
-                      <Award size={24} />
+            <div className="grid grid-cols-1 gap-4 pt-1">
+              {certificates.map((cert) => (
+                <div 
+                  key={cert.id} 
+                  className="bg-[#1A2B32] border border-white/10 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-[#0A7A94] transition-all shadow-md"
+                >
+                  <div className="flex items-center gap-3.5 w-full md:w-auto">
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-br from-[#0A7A94] to-[#0E98A8] text-white rounded-xl flex items-center justify-center shadow-lg shrink-0">
+                      <Award size={22} />
                     </div>
-                    <div>
-                      <h3 className="font-bold text-white text-sm leading-tight">{cert.title}</h3>
-                      <p className="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Délivré le : {cert.date}</p>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-bold text-white text-xs sm:text-sm leading-snug truncate sm:whitespace-normal">
+                        {cert.title}
+                      </h3>
+                      <p className="text-[10px] text-gray-400 uppercase tracking-wider mt-1">
+                        Délivré le : {cert.date}
+                      </p>
                     </div>
                   </div>
-                  <button className="w-full md:w-auto px-5 py-2.5 bg-white/5 hover:bg-[#0A7A94] border border-white/10 rounded-xl text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer">
-                    <ExternalLink size={14} /> Voir le Diplôme (PDF)
+
+                  <button 
+                    onClick={() => setSelectedCert(cert)}
+                    className="w-full md:w-auto px-4 sm:px-5 py-2.5 bg-white/5 hover:bg-[#0A7A94] border border-white/10 rounded-xl text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
+                  >
+                    <ExternalLink size={14} className="text-[#0E98A8]" />
+                    Voir le Diplôme (PDF)
                   </button>
                 </div>
               ))}
+            </div>
+
+            {/* Verification info banner */}
+            <div className="p-4 rounded-2xl bg-[#0A7A94]/15 border border-[#0A7A94]/30 flex items-center gap-3 text-xs text-gray-300">
+              <ShieldCheck size={20} className="text-[#0E98A8] shrink-0" />
+              <span>
+                Tous les certificats émis bénéficient d'un horodatage numérique officiel certifié conforme aux normes de formation en RDC.
+              </span>
             </div>
           </div>
         );
@@ -103,21 +156,40 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ onLogout }) => {
   };
 
   const MobileHeader = ({ title, onBack }: { title: string, onBack: () => void }) => (
-    <div className="px-6 py-4 border-b border-white/10 flex items-center gap-4 bg-[#122C34] sticky top-0 z-50 md:hidden">
-      <button onClick={onBack} className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors cursor-pointer">
-        <ChevronLeft size={20} className="text-white" />
+    <div className="px-4 sm:px-6 py-4 border-b border-white/10 flex items-center gap-4 bg-[#122C34] sticky top-0 z-50 md:hidden shadow-md">
+      <button 
+        onClick={onBack} 
+        className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors cursor-pointer text-white"
+        aria-label="Retour"
+      >
+        <ChevronLeft size={20} />
       </button>
-      <h2 className="text-sm font-black text-white uppercase tracking-wider">{title}</h2>
+      <h2 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider truncate">
+        {title}
+      </h2>
     </div>
   );
 
-  if (activeSubView && window.innerWidth < 768) {
+  // Mobile SubView overlay with scrollable content and no visible scrollbar
+  if (activeSubView) {
     const currentItem = menuItems.find(i => i.id === activeSubView);
     return (
-      <div className="fixed inset-0 bg-[#122C34] z-50 overflow-y-auto animate-in slide-in-from-right duration-300">
-        <MobileHeader title={currentItem?.label || ''} onBack={() => setActiveSubView(null)} />
-        {renderContent()}
-      </div>
+      <>
+        {/* Mobile SubView Screen */}
+        <div className="md:hidden fixed inset-0 bg-[#122C34] z-[60] flex flex-col overflow-hidden animate-in slide-in-from-right duration-200">
+          <MobileHeader title={currentItem?.label || ''} onBack={() => setActiveSubView(null)} />
+          <div className="flex-1 overflow-y-auto hide-scrollbar overscroll-contain">
+            {renderContent()}
+          </div>
+        </div>
+
+        {/* Certificate Viewer Modal if triggered */}
+        <CertificateViewerModal 
+          certificate={selectedCert}
+          userName={user.name}
+          onClose={() => setSelectedCert(null)}
+        />
+      </>
     );
   }
 
@@ -125,12 +197,12 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ onLogout }) => {
     <div className="flex flex-col md:flex-row h-screen bg-[#122C34] overflow-hidden text-white">
       
       {/* Sidebar Navigation */}
-      <div className="w-full md:w-1/3 lg:w-1/4 md:border-r border-white/10 overflow-y-auto h-full bg-[#122C34] relative z-10 custom-scrollbar">
+      <div className="w-full md:w-1/3 lg:w-1/4 md:border-r border-white/10 overflow-y-auto h-full bg-[#122C34] relative z-10 hide-scrollbar overscroll-contain">
         
         {/* Profile Header */}
-        <div className="pt-24 pb-8 px-6 text-center bg-gradient-to-b from-[#1A2B32] to-[#122C34] border-b border-white/5">
+        <div className="pt-20 sm:pt-24 pb-6 px-6 text-center bg-gradient-to-b from-[#1A2B32] to-[#122C34] border-b border-white/5">
           <div className="relative inline-block mb-3">
-            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-[#0A7A94] shadow-xl mx-auto flex items-center justify-center bg-[#1A2B32]">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-4 border-[#0A7A94] shadow-xl mx-auto flex items-center justify-center bg-[#1A2B32]">
               <img 
                 src={user.avatar} 
                 className="w-full h-full rounded-full object-cover object-center aspect-square" 
@@ -141,12 +213,39 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ onLogout }) => {
               <Award size={13} />
             </div>
           </div>
-          <h1 className="text-lg font-bold tracking-tight text-white mb-0.5 uppercase">{user.name}</h1>
-          <p className="text-[11px] text-[#0E98A8] font-bold uppercase tracking-wider">{user.plan}</p>
+          <h1 className="text-base sm:text-lg font-bold tracking-tight text-white mb-0.5 uppercase truncate">
+            {user.name}
+          </h1>
+          <p className="text-[10px] sm:text-[11px] text-[#0E98A8] font-bold uppercase tracking-wider">
+            {user.plan}
+          </p>
         </div>
 
         {/* Navigation Items */}
-        <div className="px-4 py-5 space-y-2 pb-32">
+        <div className="px-4 py-4 space-y-2 pb-36 md:pb-24">
+          {/* Quick PWA Install Button in Menu */}
+          {!isInstalled && (
+            <button
+              onClick={() => setShowInstallModal(true)}
+              className="w-full flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-[#F26522]/20 to-[#0A7A94]/20 border border-[#F26522]/40 text-left hover:border-[#F26522] transition-all cursor-pointer shadow-md mb-3"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-xl bg-[#F26522] text-white">
+                  <Smartphone size={16} />
+                </div>
+                <div>
+                  <span className="block text-xs font-black uppercase tracking-wider text-white">
+                    Installer l'Application
+                  </span>
+                  <span className="text-[10px] text-[#F26522] font-semibold">
+                    Android &amp; iOS PWA
+                  </span>
+                </div>
+              </div>
+              <Download size={15} className="text-[#F26522] animate-bounce" />
+            </button>
+          )}
+
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSubView === item.id;
@@ -180,7 +279,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ onLogout }) => {
 
           <button 
             onClick={() => setShowLogoutConfirm(true)}
-            className="w-full flex items-center gap-3 p-3.5 mt-6 text-red-400 hover:bg-red-500/10 rounded-2xl transition-all border border-transparent hover:border-red-500/20 group cursor-pointer"
+            className="w-full flex items-center gap-3 p-3.5 mt-4 text-red-400 hover:bg-red-500/10 rounded-2xl transition-all border border-transparent hover:border-red-500/20 group cursor-pointer"
           >
             <div className="p-2 bg-red-500/10 rounded-xl group-hover:bg-red-500/20">
               <LogOut size={18} />
@@ -192,10 +291,28 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ onLogout }) => {
 
       {/* Desktop Right Content */}
       <div className="hidden md:block flex-1 bg-[#122C34] overflow-hidden relative">
-        <div className="h-full overflow-y-auto custom-scrollbar relative z-10">
+        <div className="h-full overflow-y-auto hide-scrollbar relative z-10 overscroll-contain">
           {renderContent()}
         </div>
       </div>
+
+      {/* Certificate Viewer Modal */}
+      <CertificateViewerModal 
+        certificate={selectedCert}
+        userName={user.name}
+        onClose={() => setSelectedCert(null)}
+      />
+
+      {/* PWA Install Modal */}
+      <PWAInstallModal 
+        isOpen={showInstallModal}
+        onClose={() => setShowInstallModal(false)}
+        isInstallable={isInstallable}
+        isInstalled={isInstalled}
+        isIOS={isIOS}
+        isAndroid={isAndroid}
+        onInstall={install}
+      />
 
       {/* Logout Modal */}
       {showLogoutConfirm && (
