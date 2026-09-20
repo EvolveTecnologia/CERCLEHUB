@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" width="100%" height="100%">
+  <defs>
+    <!-- Top Ring Gradient (Teal / Turquoise) -->
+    <linearGradient id="topRingGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6" />
+      <stop offset="40%" stop-color="#0E98A8" />
+      <stop offset="100%" stop-color="#0A7A94" />
+    </linearGradient>
+
+    <!-- Bottom Left Ring Gradient (Deep Cyan / Dark Teal) -->
+    <linearGradient id="leftRingGrad" x1="0%" y1="20%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#0A7A94" />
+      <stop offset="60%" stop-color="#06586B" />
+      <stop offset="100%" stop-color="#043E4B" />
+    </linearGradient>
+
+    <!-- Bottom Right Ring Gradient (Vibrant Orange / Tangerine) -->
+    <linearGradient id="rightRingGrad" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#FF7A30" />
+      <stop offset="50%" stop-color="#F26522" />
+      <stop offset="100%" stop-color="#D9480F" />
+    </linearGradient>
+
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(10, 0)">
+    <!-- 3 Interlocking Rings Emblem -->
+    <g transform="translate(250, 110)">
+      <!-- Right Ring (Orange) - Back part -->
+      <circle cx="50" cy="40" r="54" fill="none" stroke="url(#rightRingGrad)" stroke-width="24" stroke-linecap="round" />
+      
+      <!-- Top Ring (Teal) -->
+      <circle cx="0" cy="-45" r="54" fill="none" stroke="url(#topRingGrad)" stroke-width="24" stroke-linecap="round" />
+
+      <!-- Left Ring (Deep Cyan) -->
+      <circle cx="-50" cy="40" r="54" fill="none" stroke="url(#leftRingGrad)" stroke-width="24" stroke-linecap="round" />
+
+      <!-- Weave segments to show natural interlock -->
+      <!-- Top Ring Over Left Ring junction -->
+      <path d="M -38 -5 A 54 54 0 0 1 15 -97" fill="none" stroke="url(#topRingGrad)" stroke-width="24" stroke-linecap="round" />
+
+      <!-- Orange Ring Over Top Ring junction -->
+      <path d="M 68 -10 A 54 54 0 0 1 104 40" fill="none" stroke="url(#rightRingGrad)" stroke-width="24" stroke-linecap="round" />
+
+      <!-- Deep Cyan Ring Over Orange Ring junction at bottom-left overlap -->
+      <path d="M -20 80 A 54 54 0 0 1 -50 94" fill="none" stroke="url(#leftRingGrad)" stroke-width="24" stroke-linecap="round" />
+      
+      <!-- Orange ring overlap over left ring center -->
+      <path d="M -2 38 A 54 54 0 0 1 20 86" fill="none" stroke="url(#rightRingGrad)" stroke-width="24" stroke-linecap="round" />
+    </g>
+
+    <!-- Typography: CERCLE HUB. -->
+    <g transform="translate(250, 275)" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Montserrat, sans-serif" font-weight="900" font-size="44" letter-spacing="2px">
+      <text x="-70" y="0" fill="#0A6B83" text-anchor="end">CERCLE</text>
+      <text x="-40" y="0" fill="#F26522" text-anchor="start">HUB<tspan fill="#F26522">.</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+{
+  "name": "CERCLEHUB",
+  "description": "La plateforme est une expérience éducative premium sous forme de streaming, conçue pour former et autonomiser les leaders, professionnels et acteurs du changement grâce à des contenus de haute qualité axés sur le développement économique, l\u0027innovation technologique, la durabilité environnementale, la gouvernance publique et l\u0027impact social. Alliant un design moderne, une navigation intuitive et une qualité de production digne de documentaires, elle propose des cours dynamiques, des parcours d\u0027apprentissage personnalisés et des sessions de mentorat interactives, reliant ainsi les connaissances théoriques aux pratiques concrètes nécessaires pour propulser le progrès durable et la transformation structurelle au sein de la République Démocratique du Congo et à travers le continent.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,42 @@
+:root {
+  --color-brand-primary: #0A7A94;
+  --color-brand-primary-deep: #0A6B83;
+  --color-brand-primary-dark: #06586B;
+  --color-brand-primary-light: #0E98A8;
+  --color-brand-orange: #F26522;
+  --color-brand-orange-hover: #EE591D;
+  --color-brand-dark: #122C34;
+  --color-brand-graphite: #1A2B32;
+  --color-brand-offwhite: #F9F9F6;
+}
+
+body {
+  background-color: #F9F9F6;
+  color: #122C34;
+}
+
+/* Custom scrollbars */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth gradient utilities */
+.bg-brand-primary {
+  background-color: #0A7A94;
+}
+.bg-brand-orange {
+  background-color: #F26522;
+}
+.text-brand-primary {
+  color: #0A7A94;
+}
+.text-brand-orange {
+  color: #F26522;
+}
+.text-brand-dark {
+  color: #122C34;
+}
